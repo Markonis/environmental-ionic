@@ -10,10 +10,11 @@ angular.module('app.controllers', [])
   $scope.hazardsArray = new FirebaseArray("hazards");
 }])
 
-.controller('loginCtrl', ['$scope', 'FirebaseUtil', '$state', function($scope, FirebaseUtil, $state) {
+.controller('loginCtrl', ['$scope', '$state', '$ionicHistory', 'FirebaseUtil', function($scope, $state, $ionicHistory, FirebaseUtil) {
   $scope.login = function(email, password) {
     FirebaseUtil.login(email, password)
       .then(function (data) {
+        $ionicHistory.nextViewOptions({ disableBack: true });
         $state.go('menu.allHazards');
       })
       .catch(function (error) {
@@ -22,13 +23,14 @@ angular.module('app.controllers', [])
   }
 }])
 
-.controller('signupCtrl', ['$scope', 'FirebaseUtil', '$state', function($scope, FirebaseUtil, $state) {
+.controller('signupCtrl', ['$scope', '$state', '$ionicHistory', 'FirebaseUtil', function($scope, $state, $ionicHistory, FirebaseUtil) {
   $scope.createUser = function(email, password) {
     FirebaseUtil.createUser(email, password)
       .then(function (data) {
         return FirebaseUtil.login(email, password);
       })
       .then(function (data) {
+        $ionicHistory.nextViewOptions({ disableBack: true });
         $state.go('menu.allHazards');
       })
       .catch(function (error) {
