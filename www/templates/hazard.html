@@ -2,6 +2,11 @@
   <ion-content>
     <div class="card">
       <img class="item full-width" src="http://placehold.it/350x150">
+      <div only-logged-in class="item">
+        <button class="button button-positive button-block" ng-click="takePhoto()">
+          <i class="icon ion-image"></i> Take a Photo
+        </button>
+      </div>
       <label class="item item-input">
         <span class="input-label">Title</span>
         <input type="text" placeholder="Title" ng-model="hazard.title" ng-disabled="!firebaseUtil.isLoggedIn">
@@ -12,8 +17,12 @@
       </label>
       <div class="item">
         <div class="row">
-          <div class="col">Latitude: {{hazard.location.lat}}</div>
-          <div class="col">Longitude: {{hazard.location.lng}}</div>
+          <div class="col">Latitude:</div>
+          <div class="col-60 col-center">{{hazard.location.lat}}</div>
+        </div>
+        <div class="row">
+          <div class="col">Longitude:</div>
+          <div class="col-60 col-center">{{hazard.location.lng}}</div>
         </div>
       </div>
       <div only-logged-in class="button-bar">

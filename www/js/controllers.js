@@ -51,15 +51,22 @@ angular.module('app.controllers', [])
   }
 }])
 
-.controller('hazardCtrl', ['$scope', '$state', '$ionicHistory', '$stateParams', 'FirebaseUtil', 'FirebaseArray', function($scope, $state, $ionicHistory, $stateParams, FirebaseUtil, FirebaseArray) {
+.controller('hazardCtrl', ['$scope', '$state', '$ionicHistory', '$stateParams', 'FirebaseUtil', 'FirebaseArray', 'Geolocation', function($scope, $state, $ionicHistory, $stateParams, FirebaseUtil, FirebaseArray, Geolocation) {
   var hazardsArray = new FirebaseArray('hazards');
   $scope.hazardId = $stateParams.hazardId;
 
-  if($scope.hazardId === 'new'){
+  function createNewHazard() {
     $scope.hazard = {
       location: {lat: 0, lng: 0},
       title: '', description: '', photo: ''
     }
+    Geolocation.getLocation().then(function(location) {
+      $scope.hazard.location = location;
+    });
+  }
+
+  if($scope.hazardId === 'new'){
+    createNewHazard();
   }else{
     hazardsArray.load().then(function () {
       $scope.hazard = hazardsArray.get($stateParams.hazardId);
@@ -84,6 +91,12 @@ angular.module('app.controllers', [])
         $state.go('menu.allHazards');
       });
     }
+  }
+
+  $scope.takePhoto = function () {
+    // Camera.takePhoto().then(function(img) {
+    //   $scope.hazard.photo = img;
+    // });
   }
 }])
 

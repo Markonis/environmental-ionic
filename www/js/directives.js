@@ -32,7 +32,7 @@ angular.module('app.directives', [])
   };
 }])
 
-.directive('googleMap', [function () {
+.directive('googleMap', ['Geolocation', function (Geolocation) {
   return {
     restrict: 'E',
     template: '<div class="full-width full-height"></div>',
@@ -44,9 +44,12 @@ angular.module('app.directives', [])
       // Setup
       var map = null;
       function setupMap() {
-        map = new google.maps.Map(element[0], {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+        Geolocation.getLocation().then(function (location) {
+          map = new google.maps.Map(element[0], {
+            center: location,
+            zoom: 16
+          });
+          refreshMarkers(scope.markers);
         });
       }
 
@@ -54,7 +57,6 @@ angular.module('app.directives', [])
         if(window.mapsApiInitialized){
           window.clearInterval(interval);
           setupMap();
-          refreshMarkers(scope.markers)
         }
       }, 500);
 
