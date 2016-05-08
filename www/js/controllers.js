@@ -39,13 +39,21 @@ angular.module('app.controllers', [])
   }
 }])
 
-.controller('allHazardsCtrl', function($scope) {
+.controller('allHazardsCtrl', ['$scope', '$state', 'FirebaseArray', function($scope, $state, FirebaseArray) {
+  $scope.hazardsArray = new FirebaseArray('hazards');
 
-})
+  $scope.openHazard = function(hazard) {
+    $state.go('menu.hazard', {hazardId: hazard.$id});
+  }
+}])
 
-.controller('hazardCtrl', function($scope) {
+.controller('hazardCtrl', ['$scope', '$stateParams', 'FirebaseArray', function($scope, $stateParams, FirebaseArray) {
+  var hazardsArray = new FirebaseArray('hazards');
 
-})
+  hazardsArray.load().then(function () {
+    $scope.hazard = hazardsArray.get($stateParams.hazardId);
+  });
+}])
 
 .controller('aboutCtrl', function($scope) {
 

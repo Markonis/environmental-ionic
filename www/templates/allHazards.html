@@ -3,14 +3,14 @@
         <form class="list">
             <label class="item item-input" name="hazard-search">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="search" placeholder="Search Hazards">
+                <input type="search" placeholder="Search Hazards" ng-model="search">
             </label>
         </form>
         <ion-list>
-            <ion-item class="item-thumbnail-left">
+            <ion-item ng-repeat="hazard in hazardsArray.items | filter:search" class="item-thumbnail-left" ng-click="openHazard(hazard)">
                 <img>
-                <h2>Hazard 1</h2>
-                <p>Description</p>
+                <h2 ng-bind="hazard.title"></h2>
+                <p ng-bind="hazard.description"></p>
             </ion-item>
         </ion-list>
     </ion-content>
