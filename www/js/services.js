@@ -65,5 +65,46 @@ angular.module('app.services', ['firebase'])
       return array.$remove(item);
     }
   };
-}]);
+}])
 
+.service('Camera', ['$cordovaCamera', function($cordovaCamera) {
+  var options = {
+    quality: 50,
+    destinationType: Camera.DestinationType.DATA_URL,
+    sourceType: Camera.PictureSourceType.CAMERA,
+    allowEdit: true,
+    encodingType: Camera.EncodingType.JPEG,
+    targetWidth: 100,
+    targetHeight: 100,
+    popoverOptions: CameraPopoverOptions,
+    saveToPhotoAlbum: false,
+    correctOrientation:true
+  };
+
+  return {
+    takePhoto: function () {
+      return $cordovaCamera
+        .getPicture(options)
+        .then(function(imageData) {
+          var image = document.getElementById('myImage');
+          return "data:image/jpeg;base64," + imageData;
+        });
+    }
+  };
+}])
+
+.service('Geolocation', ['$cordovaGeolocation', function($cordovaGeolocation) {
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+  return {
+    getLocation: function () {
+      return $cordovaGeolocation
+        .getCurrentPosition(posOptions)
+        .then(function (position) {
+          return {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+        });
+    }
+  }
+}]);
