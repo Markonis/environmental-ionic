@@ -1,7 +1,7 @@
 {
-  "name": "ionic-project",
+  "name": "environmental-hazards",
   "version": "1.1.1",
-  "description": "An Ionic project",
+  "description": "An app for tracking environmental hazards",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
