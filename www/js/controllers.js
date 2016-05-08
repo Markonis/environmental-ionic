@@ -2,7 +2,6 @@ angular.module('app.controllers', [])
 
 .controller('menuCtrl', ['$scope', 'FirebaseUtil', function($scope, FirebaseUtil) {
   $scope.logout = function() {
-    console.log("Log out!")
     FirebaseUtil.logout();
   }
 }])

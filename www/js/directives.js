@@ -1,6 +1,6 @@
 angular.module('app.directives', [])
 
-.directive('onlyLoggedIn', ['FirebaseUtil', '$compile', function(FirebaseUtil, $compile){
+.directive('onlyLoggedIn', ['FirebaseUtil', function(FirebaseUtil){
   return {
     restrict: 'A',
     link: function link(scope, element, attrs) {
@@ -16,7 +16,7 @@ angular.module('app.directives', [])
   };
 }])
 
-.directive('onlyLoggedOut', ['FirebaseUtil', '$compile', function(FirebaseUtil, $compile){
+.directive('onlyLoggedOut', ['FirebaseUtil', function(FirebaseUtil){
   return {
     restrict: 'A',
     link: function link(scope, element, attrs) {
