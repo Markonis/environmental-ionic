@@ -52,6 +52,18 @@ angular.module('app.services', ['firebase'])
     me.load = function () {
       return array.$loaded();
     }
+
+    me.add = function (item) {
+      return array.$add(item);
+    }
+
+    me.save = function (item) {
+      return array.$save(item);
+    }
+
+    me.delete = function (item) {
+      return array.$remove(item);
+    }
   };
 }]);
 

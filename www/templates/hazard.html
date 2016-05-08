@@ -1,9 +1,25 @@
 <ion-view title="Hazard" id="page7">
-    <ion-content padding="true" class="has-header">
-        <h1 id="hazard-heading2" ng-bind="hazard.title"></h1>
-        <div class="spacer" style="height: 8px;"></div>
-        <div id="hazard-markdown6">
-            <p ng-bind="hazard.description"></p>
+  <ion-content>
+    <div class="card">
+      <img class="item full-width" src="http://placehold.it/350x150">
+      <label class="item item-input">
+        <span class="input-label">Title</span>
+        <input type="text" placeholder="Title" ng-model="hazard.title" ng-disabled="!firebaseUtil.isLoggedIn">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Description</span>
+        <input type="text" placeholder="Description" ng-model="hazard.description" ng-disabled="!firebaseUtil.isLoggedIn">
+      </label>
+      <div class="item">
+        <div class="row">
+          <div class="col">Latitude: {{hazard.location.lat}}</div>
+          <div class="col">Longitude: {{hazard.location.lng}}</div>
         </div>
-    </ion-content>
+      </div>
+      <div only-logged-in class="button-bar">
+        <a class="button" ng-if="hazardId != 'new'" ng-click="delete()">Delete</a>
+        <a class="button" ng-click="save()">Save</a>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>
