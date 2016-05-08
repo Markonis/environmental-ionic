@@ -29,5 +29,29 @@ angular.module('app.services', ['firebase'])
   }
 
   return service;
+}])
+
+.service('FirebaseArray', ['$firebaseArray', function($firebaseArray) {
+  return function(path) {
+    var me = this;
+    var ref = new Firebase("https://fiery-torch-7446.firebaseio.com/" + path);
+    var array = $firebaseArray(ref);
+    me.items = array;
+
+    array.$watch(function(event){
+      me.items = [];
+      for(var i = 0; i < array.length; i++){
+        me.items.push(array[i]);
+      }
+    });
+
+    me.get = function (id) {
+      return array.$getRecord(id);
+    }
+
+    me.load = function () {
+      return array.$loaded();
+    }
+  };
 }]);
 

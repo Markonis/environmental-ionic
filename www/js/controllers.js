@@ -7,9 +7,9 @@ angular.module('app.controllers', [])
   }
 }])
 
-.controller('mapCtrl', function($scope) {
-
-})
+.controller('mapCtrl', ['$scope', 'FirebaseArray', function($scope, FirebaseArray) {
+  $scope.hazardsArray = new FirebaseArray("hazards");
+}])
 
 .controller('loginCtrl', ['$scope', 'FirebaseUtil', '$state', function($scope, FirebaseUtil, $state) {
   $scope.login = function(email, password) {
