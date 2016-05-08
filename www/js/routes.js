@@ -10,7 +10,7 @@ angular.module('app.routes', [])
   .state('menu.map', {
     url: '/map',
     views: {
-      'side-menu21': {
+      'side-menu': {
         templateUrl: 'templates/map.html',
         controller: 'mapCtrl'
       }
@@ -18,7 +18,7 @@ angular.module('app.routes', [])
   })
 
   .state('menu', {
-    url: '/side-menu21',
+    url: '/side-menu',
     templateUrl: 'templates/menu.html',
     controller: 'menuCtrl'
   })
@@ -26,7 +26,7 @@ angular.module('app.routes', [])
   .state('menu.login', {
     url: '/login',
     views: {
-      'side-menu21': {
+      'side-menu': {
         templateUrl: 'templates/login.html',
         controller: 'loginCtrl'
       }
@@ -36,7 +36,7 @@ angular.module('app.routes', [])
   .state('menu.signup', {
     url: '/signup',
     views: {
-      'side-menu21': {
+      'side-menu': {
         templateUrl: 'templates/signup.html',
         controller: 'signupCtrl'
       }
@@ -46,27 +46,33 @@ angular.module('app.routes', [])
   .state('menu.allHazards', {
     url: '/all-hazards',
     views: {
-      'side-menu21': {
+      'side-menu': {
         templateUrl: 'templates/allHazards.html',
         controller: 'allHazardsCtrl'
       }
     }
   })
 
-  .state('hazard', {
-    url: '/hazard',
-    templateUrl: 'templates/hazard.html',
-    controller: 'hazardCtrl'
+  .state('menu.hazard', {
+    url: '/hazard/:hazardId',
+    views: {
+      'side-menu': {
+        templateUrl: 'templates/hazard.html',
+        controller: 'hazardCtrl'
+      }
+    }
   })
 
-  .state('about', {
+  .state('menu.about', {
     url: '/about',
-    templateUrl: 'templates/about.html',
-    controller: 'aboutCtrl'
-  })
+    views: {
+      'side-menu': {
+        templateUrl: 'templates/about.html',
+        controller: 'aboutCtrl'
+      }
+    }
+  });
 
-$urlRouterProvider.otherwise('/side-menu21/map')
-
-  
+$urlRouterProvider.otherwise('/side-menu/map')
 
 });
