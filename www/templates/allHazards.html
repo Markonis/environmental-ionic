@@ -8,7 +8,7 @@
         </form>
         <ion-list>
             <ion-item ng-repeat="hazard in hazardsArray.items | filter:search" class="item-thumbnail-left" ng-click="openHazard(hazard)">
-                <img>
+                <img src="http://placehold.it/150x150">
                 <h2 ng-bind="hazard.title"></h2>
                 <p ng-bind="hazard.description"></p>
             </ion-item>
