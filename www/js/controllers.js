@@ -51,7 +51,7 @@ angular.module('app.controllers', [])
   }
 }])
 
-.controller('hazardCtrl', ['$scope', '$state', '$ionicHistory', '$stateParams', 'FirebaseUtil', 'FirebaseArray', 'Geolocation', 'Camera', function($scope, $state, $ionicHistory, $stateParams, FirebaseUtil, FirebaseArray, Geolocation, Camera) {
+.controller('hazardCtrl', ['$scope', '$state', '$ionicHistory', '$stateParams', 'FirebaseUtil', 'FirebaseArray', 'Geolocation', function($scope, $state, $ionicHistory, $stateParams, FirebaseUtil, FirebaseArray, Geolocation) {
   var hazardsArray = new FirebaseArray('hazards');
   $scope.hazardId = $stateParams.hazardId;
 
@@ -94,9 +94,9 @@ angular.module('app.controllers', [])
   }
 
   $scope.takePhoto = function () {
-    Camera.takePhoto().then(function(img) {
-      $scope.hazard.photo = img;
-    });
+    // Camera.takePhoto().then(function(img) {
+    //   $scope.hazard.photo = img;
+    // });
   }
 }])
 
