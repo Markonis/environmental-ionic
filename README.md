@@ -1,25 +1,22 @@
-Ionic App Base
-=====================
+Environmental Hazards
+=======================
 
-A starting project for Ionic that optionally supports using custom SCSS.
+This is an application for tracking environmental hazards in your area. It allows the user to:
 
-## Using this project
+- View the hazards on the map,
+- Document and edit existing hazards
+- Search the hazards by description
 
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
+## Running the development version
 
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
+Please follow these steps to run the development version of this application:
 
-```bash
-$ npm install -g ionic
-```
+- Install `npm`
+- Run `npm install -g ionic`
+- Clone this repository
+- Move into the repository folder
+- Run `npm` install
+- Run `ionic serve`
 
-Then run:
-
-```bash
-$ ionic start myProject tabs
-```
 
 More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
-
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.
