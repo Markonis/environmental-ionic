@@ -15,7 +15,7 @@ Please follow these steps to run the development version of this application:
 - Run `npm install -g ionic`
 - Clone this repository
 - Move into the repository folder
-- Run `npm` install
+- Run `npm install`
 - Run `ionic serve`
 
 
