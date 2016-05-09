@@ -21,6 +21,9 @@
     -->
     <preference name="BackupWebStorage" value="none" />
 
+    <!-- Whitelist all network traffic for testing -->
+    <allow-navigation href="*" />
+
     <feature name="StatusBar">
       <param name="ios-package" value="CDVStatusBar" onload="true" />
     </feature>
