@@ -1,6 +1,6 @@
 angular.module('app.services', ['firebase'])
 
-.service('FirebaseUtil', ['$firebaseAuth', function($firebaseAuth) {
+.service('FirebaseSession', ['$firebaseAuth', function($firebaseAuth) {
   var ref = new Firebase("https://fiery-torch-7446.firebaseio.com");
   var authObj = $firebaseAuth(ref);
   var service = {

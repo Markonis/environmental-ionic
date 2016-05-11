@@ -1,8 +1,8 @@
 angular.module('app.controllers', [])
 
-.controller('menuCtrl', ['$scope', '$state', 'FirebaseUtil', function($scope, $state, FirebaseUtil) {
+.controller('menuCtrl', ['$scope', '$state', 'FirebaseSession', function($scope, $state, FirebaseSession) {
   $scope.logout = function() {
-    FirebaseUtil.logout();
+    FirebaseSession.logout();
   }
 
   $scope.newHazard = function () {
@@ -14,9 +14,9 @@ angular.module('app.controllers', [])
   $scope.hazardsArray = new FirebaseArray("hazards");
 }])
 
-.controller('loginCtrl', ['$scope', '$state', '$ionicHistory', 'FirebaseUtil', function($scope, $state, $ionicHistory, FirebaseUtil) {
+.controller('loginCtrl', ['$scope', '$state', '$ionicHistory', 'FirebaseSession', function($scope, $state, $ionicHistory, FirebaseSession) {
   $scope.login = function(email, password) {
-    FirebaseUtil.login(email, password)
+    FirebaseSession.login(email, password)
       .then(function (data) {
         $ionicHistory.nextViewOptions({ disableBack: true });
         $state.go('menu.map');
@@ -27,11 +27,11 @@ angular.module('app.controllers', [])
   }
 }])
 
-.controller('signupCtrl', ['$scope', '$state', '$ionicHistory', 'FirebaseUtil', function($scope, $state, $ionicHistory, FirebaseUtil) {
+.controller('signupCtrl', ['$scope', '$state', '$ionicHistory', 'FirebaseSession', function($scope, $state, $ionicHistory, FirebaseSession) {
   $scope.createUser = function(email, password) {
-    FirebaseUtil.createUser(email, password)
+    FirebaseSession.createUser(email, password)
       .then(function (data) {
-        return FirebaseUtil.login(email, password);
+        return FirebaseSession.login(email, password);
       })
       .then(function (data) {
         $ionicHistory.nextViewOptions({ disableBack: true });
@@ -51,7 +51,7 @@ angular.module('app.controllers', [])
   }
 }])
 
-.controller('hazardCtrl', ['$scope', '$state', '$ionicHistory', '$stateParams', 'FirebaseUtil', 'FirebaseArray', 'Geolocation', function($scope, $state, $ionicHistory, $stateParams, FirebaseUtil, FirebaseArray, Geolocation) {
+.controller('hazardCtrl', ['$scope', '$state', '$ionicHistory', '$stateParams', 'FirebaseSession', 'FirebaseArray', 'Geolocation', function($scope, $state, $ionicHistory, $stateParams, FirebaseSession, FirebaseArray, Geolocation) {
   var hazardsArray = new FirebaseArray('hazards');
   $scope.hazardId = $stateParams.hazardId;
 

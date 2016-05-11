@@ -1,10 +1,10 @@
 angular.module('app.directives', [])
 
-.directive('onlyLoggedIn', ['FirebaseUtil', function(FirebaseUtil){
+.directive('onlyLoggedIn', ['FirebaseSession', function(FirebaseSession){
   return {
     restrict: 'A',
     link: function link(scope, element, attrs) {
-      scope.firebaseUtil = FirebaseUtil;
+      scope.firebaseUtil = FirebaseSession;
       scope.$watch('firebaseUtil.isLoggedIn', function(value) {
         if(value){
           element.removeClass('hidden');
@@ -16,11 +16,11 @@ angular.module('app.directives', [])
   };
 }])
 
-.directive('onlyLoggedOut', ['FirebaseUtil', function(FirebaseUtil){
+.directive('onlyLoggedOut', ['FirebaseSession', function(FirebaseSession){
   return {
     restrict: 'A',
     link: function link(scope, element, attrs) {
-      scope.firebaseUtil = FirebaseUtil;
+      scope.firebaseUtil = FirebaseSession;
       scope.$watch('firebaseUtil.isLoggedIn', function(value) {
         if(value){
           element.addClass('hidden');
