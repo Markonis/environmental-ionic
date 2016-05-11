@@ -1,32 +1,71 @@
 angular.module('app.services', ['firebase'])
 
-.service('FirebaseSession', ['$firebaseAuth', function($firebaseAuth) {
+.service('LocalStorage', ['$localStorage', function($localStorage) {
+  if(!$localStorage.environmentalHazards){
+    $localStorage.environmentalHazards = {};
+  }
+  return {
+    set: function (key, value) {
+      $localStorage.environmentalHazards[key] = value;
+    },
+
+    get: function (key) {
+      return $localStorage.environmentalHazards[key];
+    }
+  }
+}])
+
+.service('FirebaseSession', ['$firebaseAuth', 'LocalStorage', function($firebaseAuth, LocalStorage) {
   var ref = new Firebase("https://fiery-torch-7446.firebaseio.com");
   var authObj = $firebaseAuth(ref);
-  var service = {
-    createUser: function(email, password) {
-      return authObj.$createUser({
-        email: email,
-        password: password
-      });
-    },
+  var service = { isLoggedIn: false };
 
-    login: function(email, password) {
-      return authObj.$authWithPassword({
-        email: email,
-        password: password
-      }).then(function() {
-        service.isLoggedIn = true;
-      });
-    },
-
-    logout: function() {
-      authObj.$unauth();
-      service.isLoggedIn = false;
-    },
-
-    isLoggedIn: false
+  function rememberUser(email, password) {
+    LocalStorage.set("email", email);
+    LocalStorage.set("password", password);
   }
+
+  function forgetUser() {
+    LocalStorage.set("email", null);
+    LocalStorage.set("password", null);
+  }
+
+  function login(email, password) {
+    return authObj.$authWithPassword({
+      email: email,
+      password: password
+    }).then(function() {
+      rememberUser(email, password);
+      service.isLoggedIn = true;
+    });
+  }
+
+  function restoreSession() {
+    var email = LocalStorage.get("email");
+    var password = LocalStorage.get("password");
+    if(email && password){
+      login(email, password);
+    }
+  }
+
+  service.createUser = function(email, password) {
+    return authObj.$createUser({
+      email: email,
+      password: password
+    });
+  };
+
+  service.login = function(email, password) {
+    return login(email, password);
+  };
+
+  service.logout = function() {
+    forgetUser();
+    authObj.$unauth();
+    service.isLoggedIn = false;
+  };
+
+  restoreSession();
 
   return service;
 }])
