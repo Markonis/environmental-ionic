@@ -93,5 +93,35 @@ angular.module('app.directives', [])
       });
     }
   }
-}]);
+}])
+
+.directive('canvasImage', function () {
+  return {
+    restrict: 'E',
+    template: '<canvas class="full-width full-height"></canvas>',
+    replace: true,
+    scope: {
+      url: "@"
+    },
+    link: function(scope, element, attrs) {
+      var c = element[0];
+      var ctx = c.getContext("2d");
+
+      function drawImage(url) {
+        var img = new Image();
+        img.onload = function () {
+          c.width = img.width;
+          c.height = img.height;
+          ctx.drawImage(img, 0, 0, img.width, img.height);
+        }
+        img.src = url;
+      }
+
+      scope.$watch('url', function (value) {
+        if(value) drawImage(value);
+      })
+    }
+  }
+})
+;
 
